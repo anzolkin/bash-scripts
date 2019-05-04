@@ -1,0 +1,222 @@
+#! /usr/bin/env bash
+# functions.main
+# Библиотека функций
+
+a_number()
+{
+# a_number
+# Проверка строки на наличие исключительно числовых данных
+_NUM=$1
+_NUM=`echo $1 awk '{if($0~/[^0-9]/) print "1"}'`
+if [ "$_NUM" != "" ]; then
+        return 1
+else
+        return 0
+fi
+}
+
+characters()
+{
+# characters
+# Проверка строки на наличие исключительно символьных данных
+_LETTERS_ONLY=$1
+_LETTERS_ONLY=`echo $1 | awk '{if($0~/[^a-zA-Z]/) print "1"}'`
+if [ "$_LETTERS_ONLY" != "" ]; then
+        return 1
+else
+        return 0
+fi
+}
+
+centertxt()
+{
+_ROW=$1
+_STR=$2
+# Быстрый способ получения длины строки
+LEN=`echo $_STR | wc -c`
+COLS=`tput cols`
+_NEW_COL=`expr \( $COLS - $LEN \) / 2`
+xy $_ROW $_NEW_COL
+echo $_STR
+}
+
+check_length()
+# check_length
+# вызов: check_length строка максимальная_длина_строки
+{
+_STR=$1
+_MAX=$2
+# проверка на наличие корректных параметров
+if [ $# -ne 2 ]; then
+        echo "check_length: I need a string and max length the string should be"
+        return 1
+fi
+# проверка длины строки
+_LENGTH=`echo $_STR | awk '{print length($0)}'`
+if [ "$_LENGTH" -gt "$_MAX" ]; then
+        # длина строки слишком велика
+        return 1
+else
+        # строка имеет обычную длину
+        return 0
+fi
+}
+
+colour()
+{
+# Формат цвет_фона цвет_переднего_плана
+case $1 in
+        black_green) echo -e "\033[40;32m" ;;
+        black_yellow) echo -e "\033[40;33m" ;;
+        black_white) echo -e "\033[40;37m" ;;
+        black_cyan) echo -e "\033[40;36m" ;;
+        red_yellow) echo -e "\033[41;33m" ;;
+        cyan_blue) echo -e "\033[46;34m" ;;
+        black_red) echo -e "\033[40;31m" ;;
+        black_blue) echo -e "\033[40;34m" ;;
+esac
+}
+
+#continue_prompt
+continue_prompt()
+# вызов: continue_prompt "отображаемая_строка" ответ_по_умолчанию
+{
+_STR=$1
+_DEFAULT=$2
+# проверка на предмет указания правильных параметров
+if [ $# -lt 1 ]; then
+        echo "continue_prompt: I need a string to display"
+        return 1
+fi
+# бесконечный цикл
+while :
+do
+echo -n "$_STR [Y..N] [$_DEFAULT]:"
+read _ANS
+# если пользователь нажал [Return], устанавливаются настройки
+# по умолчанию и определяется возвращаемое значение,
+# ниже находится пробел, а затем символ $
+: ${_ANS:=$_DEFAULT}
+if [ "$_ANS" = "" ]; then
+        case $__ANS in
+                Y) return 0 ;;
+                N) return 1 ;;
+        esac
+fi
+# пользователь что-то выбрал
+case $_ANS in
+        y|Y|Yes|YES)
+        return 0
+        ;;
+        n|N|No|NO)
+        return 1
+        ;;
+        *) echo "Answer either Y or N, default is $_DEFAULT"
+        ;;
+esac
+echo $_ANS
+done
+}
+
+cursor()
+{
+# cursor
+# Отображение или скрытие курсора
+_OPT=$1
+case $_OPT in
+        on) echo -e "\033[?25h"
+        ;;
+        off) echo -e "\033[?25l"
+        ;;
+        *) return 1
+        ;;
+esac
+}
+
+# findit интерфейс для базовой команды find
+findit()
+#findit
+{
+if [ $# -lt 1 ]; then
+	echo "Usage: `basename $0` file"
+	return 1
+fi
+for loop
+do
+	find / -name $loop -print
+done
+}
+
+get_char()
+{
+# функция get_char
+# Сохранение текущих установок stty
+SAVEDSTTY=`stty -g`
+stty cbreak
+dd if=/dev/tty bs=1 count=1 2>/dev/null
+stty -cbreak
+# Восстановление установок stty
+stty $SAVEDSTTY
+}
+
+error_msg()
+{
+# error_msg
+# сигнал; сообщение; повторный сигнал;
+echo -e "\007"
+echo $@
+echo -e "\007"
+return 1
+}
+
+months()
+{
+# month
+_MONTH=$1
+# Проверка на наличие корректных параметров
+if [ $# -ne 1 ]; then
+        echo "month: I need a number 1 or 12"
+        return 1
+fi
+case $_MONTH in
+        1|01|Jan)_FULL="Января";;
+        2|02|Feb)_FULL="Февраля";;
+        3|03|Mar)_FULL="Марта";;
+        4|04|Apr)_FULL="Апреля";;
+        5|05|May)_FULL="Мая";;
+        6|06|Jun)_FULL="Июня";;
+        7|07|Jul)_FULL="Июля";;
+        8|08|Aug)_FULL="Августа";;
+        9|09|Sep)_FULL="Сентября";;
+        10|Oct)_FULL="Октября";;
+        11|Nov)_FULL="Ноября";;
+        12|Dec)_FULL="Декабря";;
+        *)echo "months: Unknown month"
+        return 1;;
+esac
+echo $_FULL
+}
+
+uni_prompt()
+# uni_prompt
+# универсальная конструкция echo
+{
+if [ `echo "\007" = "\007"`  ] > /dev/null 2>&1
+then
+        # отображаются символы, это LINUX/BSD
+        echo -n -e "$@"
+else
+        # это System V
+        echo "$@\c"
+fi
+}
+
+xy()
+{
+# _R=row, _C=column
+_R=$1
+_C=$2
+_TEXT=$3
+tput cup $_R $_C
+echo -n $_TEXT
+}
