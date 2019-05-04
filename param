@@ -1,0 +1,17 @@
+#! /bin/sh
+# параметры
+echo "This is the script name	    	:$0"
+echo "This is the first parametr    	:$1"
+echo "This is the second parametr   	:$2"
+echo "This is the third parametr    	:$3"
+echo "This is the fourth parametr   	:$4"
+echo "This is the fifth parametr    	:$5"
+echo "This is the sixth parametr    	:$6"
+echo "This is the seventh parametr  	:$7"
+echo "This is the eighth parametr   	:$8"
+echo "This is the ninth parametr    	:$9"
+echo "The number of argument passed 	:$#"
+echo "Show all arguments	    	:$*"
+echo "Show me my process ID	        :$$"
+echo "Show me the argumens in quotes    :" "$@"
+echo "Did my script go with any errors  :$?"

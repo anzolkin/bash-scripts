@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+# tput1
+BELL=`tput bel`
+CLEAR=`tput clear`
+echo $BELL
+echo $CLEAR

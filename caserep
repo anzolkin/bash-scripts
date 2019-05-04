@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+# caserep
+
+echo "Weekly report"
+echo -n "What day do you want to run report [Saturday] :"
+# Если нажать клавишу ввода, принимается заданное по умолчанию название Saturday
+read WHEN
+echo "Validating..${WHEN:="Saturday"}"
+case $WHEN in
+	Monday|mon|MONDEY);;
+	Sunday|sun|SUNDAY);;
+	Saturday|sat|SATURDAY);;
+	*)
+	echo "Are you nuts! This report can only be run on" >&2
+	echo "a Saturday, Sunday or Monday" >&2
+	exit 1
+	;;
+esac
+echo "Report to run on $WHEN"

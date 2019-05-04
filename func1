@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+# func1
+
+hello()
+{
+echo "Hello, there today's date is `date`"
+}
+echo "Now going to the function hello"
+hello
+echo "back from the function"

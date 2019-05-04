@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+# caseselect
+echo -n "Enter a number from 1 to 5 :"
+read ANS
+case $ANS in
+1) echo "You select 1";;
+2) echo "You select 2";;
+3) echo "You select 3";;
+4) echo "You select 4";;
+5) echo "You select 5";;
+*) echo "`basename $0`: This is not between 1 and 5" >&2
+exit 1
+;;
+esac

@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+# iftest2
+echo -n "Enter you name: "
+read NAME
+
+# Правильно ли пользователь ввёл данные
+
+if [ "$NAME" = "" ]; then
+	echo "You did not enter any information"
+fi

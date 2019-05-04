@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+# breakout
+# while : бесконечный цикл
+while :
+do
+	echo -n "Entry any number [1..5] : "
+	read ANS
+	case $ANS in
+		1|2|3|4|5) echo "Great, you entered a number between 1 and 5" ;;
+		*) echo "Wrong number... Bye!"
+		break
+		 ;;
+	esac
+done

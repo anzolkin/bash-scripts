@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+# until_lck
+
+LOCK_FILE=/tmp/monitor.lck
+until [ ! -f $LOCK_FILE ]
+do
+	sleep 1
+done
+echo "File deleted"

@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+# whilecontinue
+SAVEDIFS=$IFS
+IFS=':'
+INPUT_FILE=names2.txt
+NAME_HOLD="Золкин Андрей"
+LINE_NO=0
+if [ -s $INPUT_FILE ]; then
+	while read NAME DEPT ID
+	do
+		LINE_NO=`expr $LINE_NO + 1`
+		if [ "$LINE_NO" -le "2" ]; then
+			continue
+		fi
+		if [ "$NAME" = "$NAME_HOLD" ]; then
+			continue
+		else
+			echo "Now processing...$NAME $DEPT $ID"
+		fi
+	done < $INPUT_FILE
+	IFS=$SAVEDIFS
+else
+	echo "`basename $0` : Sorry, file not found or there no data in the file" >&2
+	exit 1
+fi

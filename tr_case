@@ -1,0 +1,33 @@
+#! /usr/bin/env bash
+# opt
+
+usage()
+{
+# usage
+echo "usage: `basename $0` -[l|u] file [files]" >&2
+exit 1
+}
+
+if [ $# -eq 0 ]; then
+	# Параметры не переданы
+	usage
+fi
+while [ $# -gt 0 ]
+do
+	case $1 in
+		-u|-U)echo "-u option specified"
+		# Здесь укажите все установки для верхнего регистра, затем
+		# примените команду shift
+		shift
+		;;
+		-l|-L)echo "-l option specified"
+		# Здесь укажите все установки для нижнего регистра, затем
+		# примените команду shift
+		shift
+		;;
+		-*)usage
+		;;
+		*)usage
+		;;
+	esac
+done

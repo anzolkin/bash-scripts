@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# ifpwd
+DIRECTORY=`pwd`
+if [ "$DIRECTORY" != "/" ]; then
+	echo "You need to be in the  root directory not $DIRECTORY to run this script " 2>&1
+	exit 1
+fi

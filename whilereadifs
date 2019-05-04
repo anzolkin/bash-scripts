@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+# whilereadifs
+# Сохраняем состояние IFS
+SAVEDIFS=$IFS
+# Присваиваем переменной IFS новое значение ":" 
+IFS=':'
+while read NAME DEPT ID
+do
+	echo -e "$NAME\t $DEPT\t $ID"	
+done < names.txt
+#
+IFS=$SAVEDIFS

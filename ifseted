@@ -1,0 +1,24 @@
+#! /usr/bin/env bash
+# ifseted
+if [ -z $EDITOR ]; then
+	echo "Your EDITOR environment is not set"
+	echo "I will assume you want to use vi..OK"
+	echo -n "Do you wish to change it now? [y..n] :"
+	read ANS
+	if [ "$ANS" = "Y" ] || [ "$ANS" = "y" ]; then
+		echo "Enter you EDITOR type:"
+		read EDITOR
+		if [ -z $EDITOR ] || [ "$EDITOR" = "" ]; then
+			echo "No editor entered, using vi as default"
+			EDITOR=vi
+			export EDITOR
+		fi
+		EDITOR=$EDITOR
+		export EDITOR
+		echo "Setting $EDITOR"
+	fi
+else
+	echo "Using vi as default editor"
+	EDITOR=vi
+	export vi
+fi

@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+# caseparm
+
+if [ $# != 1 ]; then
+	echo "Usage: `basename $0` [start|stop|help]" >&2
+	exit 1
+fi
+# Присваиваем переменной OPT параметр
+OPT=$1
+case $OPT in
+start)
+echo "Starting...`basename $0`"
+# Здесь коды для начала процесса
+;;
+stop)
+echo "Stopping...`basename $0`"
+# Здесь коды для прекращения процесса
+;;
+help)
+echo "Heeeeeeeeelp!!!!"
+# Здесь находится код для отображения справочной страницы
+;;
+*)
+echo "Usage: `basename $0` [start|stop|help]" >&2
+;;
+esac

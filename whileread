@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+# whileread
+
+echo "Type <Ctl-D> to terminate"
+echo -n "Enter you most liked film(s) : "
+while read FILM
+do
+	echo "Yeah, great film the $FILM"
+done

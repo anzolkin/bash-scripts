@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+# until_root
+
+IS_ROOT=`who | grep azolkin`
+until [ "IS_ROOT" ]
+do
+	sleep 5
+done
+echo "Watch it."

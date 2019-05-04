@@ -1,0 +1,30 @@
+#! /usr/bin/env bash
+# ifpass
+# Установим значения переменных в "ложь"
+INVALID_USER=yes
+INVALID_PASSWD=yes
+# Сохранение текущих установок команды stty
+SAVEDSTTY=`stty -g`
+echo "You are logging into sensitive area"
+echo -n "Enter you ID name :"
+read NAME
+# Скрываем введённые символы
+stty -echo
+echo -n "Enter you password :"
+read PASSWORD
+# Попробуем снова
+stty $SAVEDSTTY
+if [ "$NAME" = "dave" ] || [ "$NAME" = "pauline" ]; then
+	# Если это так, устанавливаем переменную
+	INVALID_USER=no
+fi
+if [ "$PASSWORD" = "mayday" ]; then
+        # Если это так, устанавливаем переменную
+        INVALID_PASSWD=no
+fi
+if [ "$INVALID_USER" = "yes" -o "$INVALID_PASSWD" = "yes" ]; then
+        echo -e "\n`basename $0 :` Sorry, wrong password or userid"
+        exit 1
+fi 
+# Если вы здесь, ваш ID и пароль в порядке
+echo -e "\nCorrect user ID and password given"

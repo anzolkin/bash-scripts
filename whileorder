@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+# whileorder
+
+INPUT_FILE=order
+HOLD=order.tmp
+if [ -s $INPUT_FILE ]; then
+	>$HOLD
+	while read LINE
+	do
+		case $LINE in
+			\#*ITEM*)
+			;;
+			*)echo $LINE > $HOLD
+			;;
+		esac
+	done < $INPUT_FILE
+	# Применение команды sed для удаления пустых строк
+	sed '/^$/d' order.tmp > order.$$
+	mv order.$$ order.tmp
+else
+	echo "`basename $0` : Sorry, $INPUT_FILE does not exist or is empty"
+fi

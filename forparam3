@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+# forparam2
+
+for params in "$@"
+do
+	echo "You supplied $params as a command line option"
+done
+	echo $params
+done

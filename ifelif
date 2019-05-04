@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+# ifelif
+echo -n "Enter you ligin name :"
+read NAME
+# Имя не введено и рассмотрение прекращается
+if [ -z $NAME ] || [ "$NAME" = "" ]; then
+	echo "You did not enter a name"
+elif
+	# Является ли именем root
+	[ "$NAME" = "root" ]; then
+	echo "Hello, root!"
+elif
+        # Является ли именем louise
+        [ "$NAME" = "louise" ]; then
+        echo "Hello, louise!"
+elif
+        # Является ли именем dave
+        [ "$NAME" = "dave" ]; then
+        echo "Hello, dave!"
+else
+	# Нет это какое-то другое имя
+	echo "You are not root or louise or dave but hi $NAME!"
+fi

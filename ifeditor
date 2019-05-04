@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# ifeditor
+if [ -z $EDITOR ]; then
+	echo "You EDITOR environment is not set"
+else
+	echo "Usin $EDITOR as the default editor"
+fi

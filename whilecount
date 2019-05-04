@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+# whilecount
+
+COUNTER=0
+while [ $COUNTER -lt 5 ]
+do
+	COUNTER=$((COUNTER + 1))
+	echo $COUNTER
+done

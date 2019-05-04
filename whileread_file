@@ -1,0 +1,24 @@
+#! /usr/bin/env bash
+# whileread_file
+# Сохраняем состояние IFS
+SAVEDIFS=$IFS
+# Присваиваем переменной IFS новое значение ":" 
+IFS=':'
+HOLD_FILE=hold_file
+NAME_MATCH="Золкин Андрей"
+INPUT_FILE=names.txt
+# Каждый раз создаём новый HOLD_FILE
+>$HOLD_FILE
+while read NAME DEPT ID
+do
+	# Выводим на экран всю информацию
+	echo $NAME $DEPT $ID >> $HOLD_FILE
+	# Имеется ли соответствие?
+	if [ "$NAME" = "$NAME_MATCH" ]; then
+		# Да, тогда удобно завершить работу
+		echo "All entries up to and including $NAME_MATCH are in $HOLD_FILE"
+		exit 0
+	fi
+done < $INPUT_FILE
+# Восстановление IFS
+IFS=$SAVEDIFS

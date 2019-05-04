@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+# direc_check
+
+. /home/azolkin/functions.main
+
+echo -n "Enter distination directory : "
+read DIREC
+if is_it_a_directory $DIREC
+	then :
+else
+	error_msg "$DIREC is not exist...creating it now"
+	mkdir $DIREC > /dev/null 2>&1
+	if [ $? != 0 ]; then
+		error_msg "Could not create directory:: check it out!"
+		return 1
+	else :
+	fi
+fi # не каталог
+echo "extracting files..."
+

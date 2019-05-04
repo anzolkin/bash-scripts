@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+# factorial
+
+if [ $# != 1 ]; then
+	echo "Please, enter an argument. The program was stoped"
+	exit 1
+fi
+factor=1;
+for ((i=1;i <= $1;i++))
+do
+	factor=$(($factor * i))
+done
+echo "$factor"

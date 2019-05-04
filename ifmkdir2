@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+# ifmkdir2
+DIR_NAME=testdirec
+THERE=`pwd`
+mkdir $DIR_NAME > /dev/null 2>&1
+if [ -d $DIR_NAME ]; then
+	cd $DIR_NAME
+	if [ $? = 0 ]; then
+		HERE=`pwd`
+		cp $THERE/*.txt $HERE
+	else
+		echo "Can not cd to $DIRNAME" >&2
+		exit 1
+	fi
+else
+	echo "Can not create directory $DIR_NAME" >&2
+	exit 1
+fi

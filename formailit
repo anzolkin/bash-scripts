@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+# formailit
+
+WHOS_ON=`who -u | awk '{print $1}'`
+for user in $WHOS_ON
+do
+	mail $user << MAYDAY
+	Dear Collegues,
+	It's my birthday today, see you down the club at 17:30 for a drink.
+	See ya.
+	$LOGNAME
+MAYDAY
+done

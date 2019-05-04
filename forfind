@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# forfind
+
+for loop
+do
+	find /etc -name $loop -print 2> /dev/null
+done

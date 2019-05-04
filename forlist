@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# forlist
+
+for loop in orange red blue gray yellow green violet
+do
+	echo The $loop
+done

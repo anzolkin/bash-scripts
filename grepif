@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+# grepif
+if grep 'Andrey\>' text.txt > /dev/null 2>&1
+then
+	echo "Great, Andrey is in the file" 
+else
+	echo "No, Andrey is not in the file"
+fi

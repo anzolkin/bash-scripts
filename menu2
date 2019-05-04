@@ -1,0 +1,134 @@
+#! /usr/bin/env bash
+# menu2
+# СЦЕНАРИЙ ГЛАВНОГО МЕНЮ
+# Подключаем нашу библиотеку функций
+. functions.main
+
+# Игнорирование CTRL-C и прерывания QUIT
+trap '' 2 3 15
+MYDATE=`date +%d/%m/%Y`
+THIS_HOST=`hostname -s`
+USER=`whoami`
+# Файл, описывающий права доступа пользователя
+USER_LEVELS=priv.user
+# Файл для хранения
+HOLD1=hold1.$$
+
+restrict()
+{
+# Сообщение о том, что пользователь не прощёл проверку
+colour red_yellow
+echo -e -n "\n\n\007Sorry, you are not authorised to use this function"
+colour black_green
+}
+
+user_level()
+{
+# user_level
+# Просмотр файла priv.user
+while read LINE
+do
+	case $LINE in
+		# Игнорирование комментариев
+		\#*)
+		;;
+		*)echo $LINE >> $HOLD1
+		;;
+	esac
+done < $USER_LEVELS
+
+FOUND=false
+while read MENU_USER PRIV
+do
+	if [ "$MENU_USER" = "$USER" ]; then
+		FOUND=true
+		case $PRIV in
+			yes|YES)return 0 ;;
+			no|NO)return 1 ;;
+		esac
+	else
+		# Соответствие не найдено, чтение следующей записи
+		continue
+	fi
+done < $HOLD1
+if [ "$FOUND" = "false" ]; then
+	echo "Sorry, $USER you have not been authorised to use this menu"
+	exit 1
+fi
+}
+
+my_exit()
+{
+# my_exit
+# Вызывается, если пользователь выполняет выход из программы
+colour black_white
+cursor on
+rm *.$$
+exit 0
+}
+
+tput init
+# Отображение на экране уровня доступа
+if user_level; then
+	ACCESS="Access mode is Hight"
+else
+	ACCESS="Access mode is Normal"
+fi
+
+tput init
+while :
+do
+	tput clear
+	colour black_green
+cat << MAYDAY
+	$ACCESS
+--------------------------------------------------------------------------------
+User: $USER		Host: $THIS_HOST			Date: $MYDATE
+--------------------------------------------------------------------------------
+			1 : ADD A RECORD
+			2 : VIEW A RECORD
+			3 : PAGE ALL RECORDS
+			4 : CHANGE A RECORD
+			5 : DELETE A RECORD
+			P : PRINT ALL RECORDS
+			H : Help screen
+			Q : Exit menu
+MAYDAY
+colour black_cyan
+echo -e -n "\tYour choice [1,2,3,4,5,P,H,Q] >"
+cursor off
+@ read CHOICE 2> /dev/null
+CHOICE=`get_char`
+case $CHOICE in
+	1) ls
+	;;
+	2) vi
+	;;
+	3) who
+	;;
+	4) if user_level; then
+		ls -l | wc
+	else
+		restrict
+	fi
+	;;
+	5) if user_level; then
+		sort /etc/passwd
+	else
+		restrict
+	fi
+	;;
+	P|p) echo -e "Printing records..." ;;
+	H|h) tput clear
+#cat << MAYDAY
+echo "This is the help screen, nothing here yet to help you!"
+#MAYDAY
+	;;
+	Q|q) my_exit
+	;;
+	*)echo -e "\t\007Unknown user response"
+	;;
+esac
+echo -e -n "\tHit the return key to continue"
+read DUMMY
+done

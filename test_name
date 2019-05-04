@@ -1,0 +1,37 @@
+#! /usr/bin/env bash
+# test_name
+
+check_length()
+# check_length
+# вызов: check_length строка максимальная_длина_строки
+{
+_STR=$1
+_MAX=$2
+# проверка на наличие корректных параметров
+if [ $# -ne 2 ]; then
+	echo "check_length: I need a string and max length the string should be"
+	return 1
+fi
+# проверка длины строки
+_LENGTH=`echo $_STR | awk '{print length($0)}'`
+if [ "$_LENGTH" -gt "$_MAX" ]; then
+	# длина строки слишком велика
+	return 1
+else
+	# строка имеет обычную длину
+	return 0
+fi
+}
+
+while :
+do
+	echo -n "Enter you first name : "
+	read NAME
+	if check_length $NAME 10
+	then
+		break
+		# Ничего не происходит
+	else
+		echo "The name field is too long 10 characters max"
+	fi
+done

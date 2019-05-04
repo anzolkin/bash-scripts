@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+# readfunc
+
+if [ -r backfunc ]; then
+	# Указание файла с параметрами
+	. backfunc
+else
+	echo "`basemane $0` : can not locate backfunc file"
+fi
+echo -n "Enter the code name: "
+read CODE
+# Соответствует ли указанный код коду из файла backfunc?
+if [ "${CODE}" != "${_CODE}" ]; then
+	echo "Wrong code...exiting...will use defaults"
+	exit 1
+fi
+echo "The environment config file reports"
+echo "Full Backup Required			: $_FULLBACKUP"
+echo "The Log File Is				: $_LOGFILE"
+echo "The Device To Backup To Is		: $_DEVICE"
+echo "You Are To Be Informed By Mail		: $_INFORM"
+echo "A Statistic Report To Be Printed	: $_PRINT_STATS"

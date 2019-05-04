@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# forUC
+
+for files in `ls quota.*`
+do
+	cat $files | tr "[a-z]" "[A-Z]"  > $files.UC
+done

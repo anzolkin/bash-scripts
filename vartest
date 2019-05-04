@@ -1,0 +1,10 @@
+#! /bin/bash
+# vartest
+
+echo "What time do you wish to start the payroll [03:00]:"
+read TIME
+echo " process to start at ${TIME:=03:00} OK"
+echo "Is it a monthly or weekly run [Weekly]:"
+read RUN_TYPE
+echo "Run type is ${RUN_TYPE:=Weekly}:"
+at $RUN_TYPE $TIME

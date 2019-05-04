@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+# tput2
+BOLD=`tput bold`
+REV=`tput rev`
+NORMAL=`tput sgr0`
+CURSOR_OFF=`civis`
+CURSOR_ON=`cnorm`
+
+tput init
+
+# Сокрытие курсора, выделение текста, перестановка текста, отображение курсора
+echo $CURSOR_OFF
+echo "${BOLD} WELCOM TO THE PIZZA PLACE ${NORMAL}"
+echo -e "\n ${REV} WE ARE OPEN SEVEN DAYS A WEEK  ${NORMAL}"
+echo $CURSOR_ON

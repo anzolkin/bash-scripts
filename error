@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+# error
+# Установка set -x
+set -x
+LIST="Peter Susan John Barry Lucy Norman Bill Leslie"
+echo -n "Enter your Name : "
+read NAME
+for LOOP in $LIST
+do
+	if [ "$LOOP" = "$NAME" ]; then
+		echo "you're on the list, you're in"
+		break
+	fi
+done
+# Отмена установки set -x
+set +x

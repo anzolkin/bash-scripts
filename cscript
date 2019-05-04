@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+# cscript Создаёт пустой файл сценария
+if [ $# -lt "1" ]; then
+	echo "Введи параметр - имя создаваемого скрипта!"
+	exit 1
+fi
+NewFile=$1
+(
+cat <<EOF
+#! /usr/bin/env bash
+#
+EOF
+) > $NewFile
+`chmod u+x $NewFile`

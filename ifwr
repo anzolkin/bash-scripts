@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# ifwr
+LOGFILE=text.txt
+echo $LOGFILE
+if [ ! -w "$LOGFILE" ]; then
+	echo "You can not write to $LOGFILE" 2>&1
+fi

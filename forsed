@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+# forsed
+
+for files in `ls quota.*`
+do
+	sed -e "/^$/d" $files > $files.HOLD
+	mv $files.HOLD $files
+done

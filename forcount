@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+# forcount
+
+counter=0
+for files in `ls`
+do
+	# increment - приращение
+	counter=`expr $counter + 1`
+done
+	echo "There are $counter files in `pwd` we need to process"

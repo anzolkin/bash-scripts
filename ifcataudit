@@ -1,0 +1,19 @@
+#! /usr/bin/env bash
+# ifcataudit
+# Размещение файла регистрации
+LOCAT_1=/usr/opts/audit/logs/audit.log
+LOCAT_2=/usr/local/audit/audit.log
+if [ -r LOCAT_1 ]; then
+	# Если файл находится в этом каталоге и может просматриватьс,
+	# применим к нему команду cat
+	echo "Using LOCAT_1"
+	cat $LOCAT_1
+elif [ -r LOCAT_2 ]; then
+        # Иначе файл должен находиться в этом каталоге и его можно просматривать
+        echo "Using LOCAT_2"
+        cat $LOCAT_2
+else
+	# Нет ни в одном каталоге...
+	echo "`basename $0`: Sorry, the audit file is not readable or can not be located" >&2
+	exit 1
+fi

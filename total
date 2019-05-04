@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+# total
+
+LOOP=0
+TOTAL=0
+COUNT=0
+echo "Items Dept"
+echo "____________"
+while read DEPT ITEMS
+do
+	COUNT=`expr $COUNT + 1`
+	if [ "$DEPT" = "GIFT" ]; then
+		TOTAL=`expr $TOTAL + $ITEMS`
+		ITEMS=`expr $ITEMS + 1`
+		echo -e "$ITEMS\t$DEPT"
+	fi
+done < total.txt
+echo "============"
+echo "$TOTAL"
+echo "There were $COUNT entries altogever in the file"

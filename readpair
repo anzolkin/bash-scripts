@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+# readpair
+
+while read rec1
+do
+	read rec2
+	# Выполняется дальнейшая обработка для тестирования или сравнения обеих записей
+	echo "This is record one of a pair $rec1 : "
+	echo "This is record two of a pfir $rec2 : "
+	echo "-------------------------------------"
+done < record.txt

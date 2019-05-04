@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# ifcp
+if cp myfile myfile.bak > /dev/null 2>&1; then
+	echo "Good copy!"
+else
+	echo "`basename $0`: error could not copy the files" >&2
+fi

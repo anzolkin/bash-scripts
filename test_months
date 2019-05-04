@@ -1,0 +1,32 @@
+#! /usr/bin/env bash
+# test_months
+
+months()
+{
+# month
+_MONTH=$1
+# Проверка на наличие корректных параметров
+if [ $# -ne 1 ]; then
+	echo "month: I need a number 1 or 12"
+	return 1
+fi
+case $_MONTH in
+	1|01|Jan)_FULL="Января";;
+	2|02|Feb)_FULL="Февраля";;
+	3|03|Mar)_FULL="Марта";;
+	4|04|Apr)_FULL="Апреля";;
+	5|05|May)_FULL="Мая";;
+	6|06|Jun)_FULL="Июня";;
+	7|07|Jul)_FULL="Июля";;
+	8|08|Aug)_FULL="Августа";;
+	9|09|Sep)_FULL="Сентября";;
+	10|Oct)_FULL="Октября";;
+	11|Nov)_FULL="Ноября";;
+	12|Dec)_FULL="Декабря";;
+	*)echo "months: Unknown month"
+	return 1;;
+esac
+echo $_FULL
+}
+MY_MONTH=`months 06`
+echo "Формируем отчёт на конец $MY_MONTH"

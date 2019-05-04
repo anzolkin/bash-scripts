@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+# ignore_hash
+
+INPUT_FILE=config
+if [ -s $INPUT_FILE ]; then
+	while read LINE
+	do
+		case $LINE in
+			\#*) ;; # Игнорировать все символы хэша
+			*) echo $LINE ;;
+		esac
+	done < $INPUT_FILE
+else
+	echo "`basename $0` : Sorry, $INPUT_FILE does not exist or is empty"
+	exit 1
+fi

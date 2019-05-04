@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+# forping
+
+HOSTS="aitishnik.ru yandex.ru google.com"
+for loop in $HOSTS
+do
+	ping -c 2 $loop
+done

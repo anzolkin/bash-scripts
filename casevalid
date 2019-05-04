@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# casevalid
+
+TYPE=""
+echo -n "Enter the account Dep No: :"
+read ACC
+case $ACC in
+234);;
+453);;
+655);;
+454);;
+*) 
+echo "`basename $0`: Unknown dept No:" >&2
+echo "try.. 234,453,655,454"
+exit 1
+esac
+# Если оказались здесь, получен верный номер отдела
+echo "1 . post"
+echo "2 . prior"
+echo "Enter the type of report :"
+read ACC_TYPE
+case $ACC_TYPE in
+	1)TYPE=post;;
+	2)TYPE=prior;;
+	*)
+echo "`basename $0`: Unknown account type" >&2
+exit 1
+;;
+esac
+# Если оказались здесь, то всё указано правильно
+echo "Now running report for dept $ACC for the type $TYPE"
+# Выполняем отчёт о команде...

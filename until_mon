@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+# until_mon
+
+# Получаем столбец со значениями процентов и удаляем заголовок
+LOOK_OUT=`df | grep /dev/sda2 | awk '{print $5}' | sed 's/%//g'`
+echo $LOOK_OUT
+until [ "$LOOK_OUT" -gt "90" ]
+do
+	echo "Filesystem is nearly full"
+	exit 0
+done

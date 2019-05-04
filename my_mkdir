@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+# my_mkdir
+is_it_a_directory ()
+{
+    if [ $# -lt 1 ]; then
+        echo "is_it_a_directory: I need an a argument";
+        return 1;
+    fi;
+    _DIRECTORY_NAME=$1;
+    if [ ! -d $_DIRECTORY_NAME ]; then
+        return 1;
+    else
+        return 0;
+    fi
+}
+
+echo -n "Enter destination directory : "
+read DIREC
+if is_it_a_directory $DIREC;
+then :
+else
+echo "$DIREC does not exist,create it now [y..n] :"
+fi

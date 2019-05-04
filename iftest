@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# -iftest
+if [ "10" -lt "12" ]
+then
+	# Да, 10 меньше 12
+	echo "Yes, 10 is less then 12"
+fi

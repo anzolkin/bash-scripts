@@ -1,0 +1,2 @@
+#! /bin/sh
+echo "Hello word this is 'basename $0' calling"

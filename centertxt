@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+# centertxt
+# Здесь есть функция центрирования текста
+
+xy()
+{
+# _R=row, _C=column
+_R=$1
+_C=$2
+_TEXT=$3
+tput cup $_R $_C
+echo -n $_TEXT
+}
+
+centertxt()
+{
+_ROW=$1
+_STR=$2
+# Быстрый способ получения длины строки
+LEN=`echo $_STR | wc -c`
+COLS=`tput cols`
+_NEW_COL=`expr \( $COLS - $LEN \) / 2`
+xy $_ROW $_NEW_COL
+echo $_STR
+}
+centertxt 10 "MAIN EVENT"

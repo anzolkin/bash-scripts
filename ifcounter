@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+# ifcounter
+COUNTER=100
+echo "Do you wish to change the counter value currently set at $COUNTER? [y..n] :"
+read ANS
+if [ "$ANS" = "Y" ] || [ "$ANS" = "y" ]; then
+	echo "Enter sensible value "
+	read VALUE
+	# Простая проверка на то, что введённое значение - число
+	expr $VALUE + 10 > /dev/null 2>&1
+	STATUS=$?
+	if [ "$VALUE" = "" ] || [ "$STATUS" != "0" ]; then
+		echo "You either entered nothing or non-numeric" >&2
+		echo "Sorry now exiting..counter stays at $COUNTER" >&2
+		exit 1
+	fi
+	COUNTER=`expr $COUNTER + $VALUE`
+	echo "Counter now set to $COUNTER"
+else
+	echo "Counter stays at $COUNTER"
+fi

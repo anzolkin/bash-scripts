@@ -1,0 +1,44 @@
+#! /usr/bin/env bash
+# colour_scr
+
+. functions.main
+tput init
+MYDATE=`date +%D`
+
+tput clear
+colour red_yellow
+xy 2 3 "USER: $LOGNAME"
+colour cyan_blue
+centertxt 3 "_ADD A NEW WARP DRIVE TO A STAR SHIP_"
+#echo -e "\f\f"
+colour black_cyan
+centertxt 4 "4_______________________________________"
+
+colour black_yellow
+centertxt 5 "5_______________________________________"
+centertxt 6 "6_______________________________________"
+centertxt 7 "7_______________________________________"
+colour red_yellow
+centertxt 9 "Star Date $MYDATE"
+colour black_blue
+centertxt 10 "10________________________________________"
+
+colour black_green
+xy 16 14 "Initials: "
+read INIT
+xy 18 14
+echo -n "Security code №: : "
+read CODE
+xy 20 14
+echo -n "Ship's serial №: : "
+read SERIAL
+xy 22 14
+echo -n "Is it on the Post Side: "
+read PORT
+
+colour black_red
+centertxt 25 "Save This Record [Y..N]:"
+read ans
+
+# Восстановление обычных цветов экрана
+colour black_white
